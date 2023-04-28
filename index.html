@@ -17,8 +17,8 @@
     <div class="panel">
         <div class=" text-center" id="result">
             <div class="heder">
-                <a href="" onclick="serchwhether()"> <i class="fa-solid fa-magnifying-glass mt-4 m-3"></i></a>
-                <input type="text" class="mt-2" id="serchloc">
+                <a onclick="serchwether()"> <i class="fa-solid fa-magnifying-glass mt-4 m-3"onclick="serchwether()"></i></a>
+                <input type="text" class="mt-2"id="serchloc">
             </div>
             <h4 class="" id="loclty"></h4>
             <span id="maind" class="disc"></span> <br>
@@ -60,7 +60,8 @@
         time = `${hours}:${minutes}:${seconds}`
         return time;
     }
-    function serchdata(data) {
+
+    function serchlocation(data) {
         locality = data.name
         temp = Math.floor(data.main.temp - 273.15)
         main = data.weather[0].main
@@ -88,17 +89,16 @@
         psr.innerText = `Pressure : ${pressure} hPa`
         update.innerText = `last updated on ${date}`
     }
-    function serchwhether() {
-        serchloc = serchloc.value
-        fetch(` https://api.openweathermap.org/data/2.5/weather?q=${serchloc}&appid=b41ec3be35c7dac8aabbc21ba253137a`).then(data => data.json())
-            .then(data => serchdata(data))
-
+    function serchwether() {
+        loc = serchloc.value
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=b41ec3be35c7dac8aabbc21ba253137a`).then(data => data.json())
+            .then(data => serchlocation(data))
     }
     success = (position) => {
         latitude = position.coords.latitude
         longitude = position.coords.longitude
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=62d116a858634a47707feac3ec79a3e2`).then(data => data.json())
-            .then(data => serchdata(data))
+            .then(data => serchlocation(data))
 
     }
     error = () => {
