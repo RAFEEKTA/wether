@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./whether.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/7c38c1152d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="panel ">
+        <div class=" w-50 m-auto text-center" id="result">
+            <div class="heder">
+                <a onclick="serchwhether()"> <i class="fa-solid fa-magnifying-glass m-3"
+                        style="color: #ffffff; float: right; font-size: 25px;"></i></a>
+                <input type="text" class="mt-2" id="serchloc">
+            </div>
+            <h4 class="" id="loclty"></h4>
+            <span id="maind" class="disc"></span> <br>
+            <div class="display w-50 container text-center" id="display">
+                <i class="fa-solid fa-cloud-bolt" style="color: #f2be02;font-size: 35px;"></i>
+                <span id="deg"></span><br>
+                <span id="feel" class="disc"></span>
+                <br>
+                <span class="disc" id="max">rafeek</span>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 disc" id="humdty"></div>
+                    <div class="col-lg-4 col-md-6 disc" id="sunrise"></div>
+                    <div class="col-lg-4 col-md-6 disc" id="sunset"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 disc" id="visbl"></div>
+                    <div class="col-lg-4 col-md-6 disc" id="wnd"></div>
+                    <div class="col-lg-4 col-md-6 disc" id="psr"></div>
+                </div>
+                <div class="conta" id="update"></div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+</body>
+<script>
+    function times(data) {
+        unix_timestamp = data
+        var date = new Date(unix_timestamp * 1000);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        time = `${hours}:${minutes}:${seconds}`
+        return time;
+    }
+    function serchdata(data){
+        locality = data.name
+        temp = Math.floor(data.main.temp - 273.15)
+        main = data.weather[0].main
+        disc = data.weather[0].description
+        humidity = data.main.humidity
+        tempmin = Math.floor(data.main.temp_min - 273.15)
+        tempmax = Math.floor(data.main.temp_max - 273.15)
+        pressure = data.main.pressure
+        feelslike = Math.floor(data.main.feels_like - 273.15)
+        wind = data.wind.speed
+        visibility = data.visibility / 1000
+        sunris = times(data.sys.sunrise)
+        sunse = times(data.sys.sunset)
+        date = times(data.dt)
+        loclty.innerText = ` location   :   ${locality}`
+        deg.innerText = `${temp} ' C`
+        maind.innerText = `${main}`
+        feel.innerText = `Feels like  ${feelslike} /  ${disc}`
+        max.innerText = `${tempmin} / ${tempmax}`
+        humdty.innerText = `Humidity  : ${humidity} %`
+        sunrise.innerText = `Sun rise : ${sunris}`
+        sunset.innerText = `Sun set : ${sunse}`
+        visbl.innerText = `Visibility : ${visibility} Km`
+        wnd.innerText = `Wind : ${wind} m/s`
+        psr.innerText = `Pressure : ${pressure} hPa`
+    }
+    function serchwhether(){
+        serchloc=serchloc.value
+       fetch(` https://api.openweathermap.org/data/2.5/weather?q=${serchloc}&appid=b41ec3be35c7dac8aabbc21ba253137a`).then(data =>  data.json())
+       .then(data=>serchdata(data))
+
+    }
+    function autolocation(data) {
+        locality = data.name
+        temp = Math.floor(data.main.temp - 273.15)
+        main = data.weather[0].main
+        disc = data.weather[0].description
+        humidity = data.main.humidity
+        tempmin = Math.floor(data.main.temp_min - 273.15)
+        tempmax = Math.floor(data.main.temp_max - 273.15)
+        pressure = data.main.pressure
+        feelslike = Math.floor(data.main.feels_like - 273.15)
+        wind = data.wind.speed
+        visibility = data.visibility / 1000
+        sunris = times(data.sys.sunrise)
+        sunse = times(data.sys.sunset)
+        date =  times(data.dt)
+        loclty.innerText = ` location   :   ${locality}`
+        deg.innerText = `${temp} ' C`
+        maind.innerText = `${main}`
+        feel.innerText = `Feels like  ${feelslike} /  ${disc}`
+        max.innerText = `${tempmin} / ${tempmax}`
+        humdty.innerText = `Humidity  : ${humidity} %`
+        sunrise.innerText = `Sun rise : ${sunris}`
+        sunset.innerText = `Sun set : ${sunse}`
+        visbl.innerText = `Visibility : ${visibility} Km`
+        wnd.innerText = `Wind : ${wind} m/s`
+        psr.innerText = `Pressure : ${pressure} hPa`
+        update.innerText =`Last updated on ${date}`
+
+    }
+    success = (position) => {
+        latitude = position.coords.latitude
+        longitude = position.coords.longitude
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=62d116a858634a47707feac3ec79a3e2`).then(data => data.json())
+            .then(data => autolocation(data))
+    }
+    error = () => {
+
+    }
+    navigator.geolocation.getCurrentPosition(success, error);
+
+
+
+</script>
+
+</html>

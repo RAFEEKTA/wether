@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau:wght@800&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.panel {
+    height: 100vh;
+    background: linear-gradient(to bottom, #ffffff 0%, #0000ff 50%);
+    color: #ffffff;
+    display: flex;
+
+}
+
+#result {
+    background-color: rgba(231, 10, 10, 0.235);
+  
+    border-radius: 15px;
+  
+    font-family: 'Ysabeau', sans-serif;
+}
+
+input {
+    padding-left: 20px;
+    height: 47px;
+    width: 40%;
+    border-radius: 30px;
+    border: none;
+    float: right;
+    background-color: rgba(249, 249, 249, 0.532);
+
+}
+
+.heder {
+    height: 65px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.139);
+}
+
+
+#deg{
+    font-family: Arial, Helvetica, sans-serif
+    ;
+    
+    font-size: 50px;
+
+}
+
+.disc{
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.col-lg-4{
+    height: 50px;
+    border: 1px solid green;
+}
+#update{
+    font-size: 20px;
+    margin-bottom: 30px;
+  
+   
+    font-family: 'Ysabeau', sans-serif;
+}
+@media(max-width:100px) {
+    #result{
+        width: 100%;
+    }
+
+}
+@media(max-width:800px) {
+    #result{
+        width: 100%;
+    }
+    .display{
+        width: 100%;
+    }
+
+}
