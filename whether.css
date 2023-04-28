@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau:wght@800&display=swap');
+
 body {
     margin: 0;
     padding: 0;
@@ -10,15 +11,17 @@ body {
     background: linear-gradient(to bottom, #ffffff 0%, #0000ff 50%);
     color: #ffffff;
     display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 #result {
     background-color: rgba(231, 10, 10, 0.235);
-  
     border-radius: 15px;
-  
     font-family: 'Ysabeau', sans-serif;
+    width: 50%;
+  
 }
 
 input {
@@ -36,44 +39,57 @@ input {
     height: 65px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.139);
 }
+.fa-magnifying-glass{
+    color: #ffffff;
+     float: right; 
+     font-size: 25px;
+}
+.fa-cloud-bolt{
+    color: #f2be02;
+    font-size: 35px;
+}
 
 
-#deg{
-    font-family: Arial, Helvetica, sans-serif
-    ;
-    
+#deg {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 50px;
 
 }
 
-.disc{
+.disc {
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
 }
 
-.col-lg-4{
-    height: 50px;
-    border: 1px solid green;
-}
-#update{
-    font-size: 20px;
-    margin-bottom: 30px;
-  
-   
-    font-family: 'Ysabeau', sans-serif;
-}
-@media(max-width:100px) {
-    #result{
-        width: 100%;
-    }
 
+#update {
+font-size: 20px;
 }
+
+
+
 @media(max-width:800px) {
-    #result{
-        width: 100%;
-    }
-    .display{
-        width: 100%;
+    #result {
+        width: 90%;
+        
     }
 
+    input{
+        width: 75%;
+    }
+    
+
+}
+@media(max-width:428px) {
+    #result {
+        width: 90%;
+        
+    }
+
+   .display{
+    width: 50%;
+   }
+   #deg{
+    font-size: 35px;
+   }
 }
